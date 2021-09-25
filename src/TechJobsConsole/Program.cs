@@ -118,19 +118,27 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            //Objective: loop over list and print out Dictionary at each index
-            //Step 1: loop over list
-            for (int i = 0; i < someJobs.Count; i++)
+            //Check to see if argument List contains any items. If not, print "no results" message
+            if (someJobs.Count < 1)
             {
-                Console.WriteLine("\r\n*****");
-                //Step 2: Print out Dictionary at each index
-                foreach (KeyValuePair<string, string> j in someJobs[i])
-                {
-                    Console.WriteLine("{0}: {1}", j.Key, j.Value);
-                }
-                Console.WriteLine("*****");
+                Console.WriteLine("No results. Please try a different search.");
             }
+            else
+            {
 
+                //If so, loop over List and print out Dictionary at each index
+                //Step 1: Loop over List
+                for (int i = 0; i < someJobs.Count; i++)
+                {
+                    Console.WriteLine("\r\n*****");
+                    //Step 2: Print out Dictionary at each index
+                    foreach (KeyValuePair<string, string> j in someJobs[i])
+                    {
+                        Console.WriteLine("{0}: {1}", j.Key, j.Value);
+                    }
+                    Console.WriteLine("*****");
+                }
+            }
         }
     }
 }
