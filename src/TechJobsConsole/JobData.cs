@@ -47,9 +47,9 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
+                string aValue = row[column].ToLower();
 
-                if (aValue.Contains(value))
+                if (aValue.Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -144,13 +144,18 @@ namespace TechJobsConsole
             // load data, if not already loaded
             LoadData();
 
+            //create a new list of dictionaries to hold search results
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
             foreach (Dictionary<string, string> posting in AllJobs)
             {
                 foreach (KeyValuePair<string, string> lineItem in posting)
                 {
-                    if (lineItem.Value.Contains(value) && !jobs.Contains(posting)) {
+                    //Compare all-lowercase lineItems and values to eachother for case-insensitivity
+                    string lineItemLower = lineItem.Value.ToLower();
+
+                    //Check each key value pair for the search term - if the search term is present and the dictionary containing the key value pair isn't already in the jobs list, add to jobs
+                    if (lineItemLower.Contains(value.ToLower()) && !jobs.Contains(posting)) {
                         jobs.Add(posting);
                     }
                 }
