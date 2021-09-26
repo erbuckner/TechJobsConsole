@@ -110,7 +110,7 @@ namespace TechJobsConsole
             bool isBetweenQuotes = false;
             StringBuilder valueBuilder = new StringBuilder();
             List<string> rowValues = new List<string>();
-
+            
             // Loop through the row string one char at a time
             foreach (char c in row.ToCharArray())
             {
@@ -138,5 +138,43 @@ namespace TechJobsConsole
 
             return rowValues.ToArray();
         }
-    }
-}
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> posting in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> lineItem in posting)
+                {
+                    if (lineItem.Value.Contains(value) && !jobs.Contains(posting)) {
+                        jobs.Add(posting);
+                    }
+                }
+                
+            }
+
+
+            return jobs;
+        }
+
+         
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
